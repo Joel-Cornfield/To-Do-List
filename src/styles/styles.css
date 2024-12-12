@@ -1,0 +1,681 @@
+/** main css **/
+:root {
+    --background-color: #ffffff;
+    --header-bg: #ffffff;
+    --sidebar-bg: #f8f9fa;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --hover-bg: rgba(0, 123, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/** layout css **/
+
+.app-container {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main";
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.app-header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-color);
+    transition: 0.3s;
+}
+
+.app-sidebar {
+    grid-area: sidebar;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    margin-bottom: 2rem;
+}
+
+.sidebar-section h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 0.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.sidebar-nav a:hover {
+    background-color: var(--hover-bg);
+}
+
+.sidebar-nav a.active {
+    background-color: var(--hover-bg);
+    color: #4FFFB0;
+    font-weight: bold;
+}
+
+.app-main {
+    grid-area: main;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user-name {
+    cursor: pointer;
+}
+
+.user-name:hover {
+    text-decoration: underline;
+}
+
+.user-avatar .default-avatar {
+    width: 100%;
+    height: 100%;
+    background-color: #4FFFB0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: bold;
+    user-select: none;
+}
+
+.user-avatar-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.user-profile {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    margin-top: 0.5rem;
+    z-index: 1000;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: var(--hover-bg);
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        grid-template-areas:
+            "header"
+            "main";
+        grid-template-columns: 1fr;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .app-sidebar {
+        position: fixed;
+        left: -250px;
+        top: 0;
+        height: 100vh;
+        width: 250px;
+        transition: 0.3s;
+        z-index: 1000;
+    }
+
+    .app-sidebar.active {
+        left: 0;
+    }
+}
+
+.app-title {
+    margin: 0;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: baseline;
+}
+
+.app-title .todo {
+    font-weight: 300;
+    color: #17B169;
+}
+
+.app-title .list {
+    font-weight: 700;
+    color: #4FFFB0;
+}
+
+.todo-icon {
+    width: 24px;  /* Adjust size of the icon */
+    height: 24px; /* Adjust size of the icon */
+    margin-right: 8px; /* Space between icon and text */
+    vertical-align: middle; /* Align the icon vertically with the title */
+}
+
+.project-item.active {
+    background-color: var(--hover-bg);
+    color: #4FFFB0;
+    font-weight: bold;
+}
+
+.about-content .features-text {
+    margin-top: 2rem;
+}
+
+
+/** Onboarding css **/
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.onboarding-modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.onboarding-modal h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.onboarding-modal input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.avatar-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+}
+
+.avatar-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+#avatar-preview-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.avatar-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.onboarding-modal .avatar-preview .default-avatar {
+    width: 100%;
+    height: 100%;
+    background-color: #4FFFB0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem; /* or whatever size you prefer */
+    font-weight: bold;
+    user-select: none;
+}
+.file-input {
+    display: none;
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #4FFFB0;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #17B169;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background-color: #f8f9fa;
+    color: #212529;
+    border: 1px solid #dee2e6;
+}
+
+.btn-secondary:hover {
+    background-color: #e2e6ea;
+    transform: translateY(-1px);
+}
+
+/** Projects css **/
+
+.projects-list {
+    margin: 1rem 0;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.project-item:hover {
+    background-color: var(--hover-bg);
+}
+
+.sidebar-nav a.active,
+.project-item.active {
+    background-color: var(--hover-bg);
+    font-weight: bold;
+}
+
+.project-name {
+    flex-grow: 1;
+    margin-right: 0.5rem;
+}
+
+.delete-project {
+    opacity: 0;
+    background: none;
+    border: none;
+    color: #212529;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: opacity 0.2s;
+}
+
+.project-item:hover .delete-project {
+    opacity: 1;
+}
+
+.add-project-form {
+    margin-top: 1rem;
+}
+
+.add-project-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.project-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-add-project {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #4FFFB0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-add-project:hover {
+    background-color: #17B169;
+}
+
+/** Todos css **/
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.todo-modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.todo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.todo-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    gap: 1rem;
+}
+
+.todo-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.todo-content {
+    flex-grow: 1;
+}
+
+.todo-title {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.todo-description {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.todo-metadata {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.todo-item .todo-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.todo-modal .todo-actions {
+    position: static;
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.todo-actions button {
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6c757d;
+    transition: color 0.2s;
+}
+
+.todo-actions button:hover {
+    color: #4FFFB0;
+}
+
+.edit-todo svg {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-todo {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 100px;
+}
+
+.btn-todo.btn-primary {
+    background-color: #4FFFB0;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-todo.btn-primary:hover {
+    background-color: #17B169;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.btn-todo.btn-secondary {
+    background-color: #f8f9fa;
+    color: #212529;
+    border: 1px solid #dee2e6;
+}
+
+.btn-todo.btn-secondary:hover {
+    background-color: #e2e6ea;
+    transform: translateY(-1px);
+}
+
+.project-section {
+    margin-bottom: 2rem;
+}
+
+.project-header {
+    font-size: 1.1rem;
+    margin: 1.5rem 0 1rem 0;
+    font-weight: 600;
+}
+
+.project-section:first-child .project-header {
+    margin-top: 0;
+}
+
+.add-task-btn {
+    padding: 0.8rem 1.5rem;
+    background-color: #4FFFB0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.add-task-btn:hover {
+    background-color: #17B169;
+}
+
+.btn-todo.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-todo.btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.about-content {
+    margin: 1.5rem 0;
+    line-height: 1.6;
+}
+
+.about-content ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.about-content .signature {
+    margin-top: 2rem;
+    font-style: italic;
+    color: #666;
+    line-height: 1.5;
+}
+
+.add-task-btn.disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.add-task-btn.disabled:hover {
+    background-color: #cccccc;
+}
