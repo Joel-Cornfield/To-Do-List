@@ -679,3 +679,177 @@ body {
 .add-task-btn.disabled:hover {
     background-color: #cccccc;
 }
+
+/** ------------------ **/
+/**   Extra Animation css **/
+/** ------------------ **/
+
+:root {
+    --background-color: #f4f7f6;
+    --header-bg: #ffffff;
+    --sidebar-bg: #e6f0ed;
+    --text-color: #2c3e50;
+    --text-muted: #7f8c8d;
+    --border-color: #b2d8b2;
+    --hover-bg: rgba(75, 255, 176, 0.15);
+    --accent-color: #4FFFB0;
+    --accent-dark: #17B169;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Add subtle animation to the entire app */
+.app-container {
+    transition: background-color 0.3s ease;
+}
+
+/* Enhanced hover effects */
+.project-item,
+.sidebar-nav a,
+.todo-item {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.project-item::before,
+.sidebar-nav a::before,
+.todo-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, var(--hover-bg), transparent);
+    transition: all 0.5s ease;
+    z-index: 1;
+}
+
+.project-item:hover::before,
+.sidebar-nav a:hover::before,
+.todo-item:hover::before {
+    left: 100%;
+}
+
+/* Subtle scale effect on hover */
+.project-item:hover,
+.sidebar-nav a:hover,
+.todo-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+/* Animated buttons */
+.btn-primary,
+.btn-add-project,
+.add-task-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary::after,
+.btn-add-project::after,
+.add-task-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: var(--accent-dark);
+    transition: height 0.3s ease;
+    z-index: -1;
+}
+
+.btn-primary:hover::after,
+.btn-add-project:hover::after,
+.add-task-btn:hover::after {
+    height: 100%;
+}
+
+/* Animated todo checkboxes */
+.todo-checkbox {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--accent-color);
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.todo-checkbox:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    animation: checkbox-pulse 0.5s;
+}
+
+@keyframes checkbox-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Subtle text animations */
+.todo-title {
+    transition: color 0.3s ease;
+}
+
+.todo-item:hover .todo-title {
+    color: var(--accent-color);
+}
+
+/* Enhanced modal animations */
+.modal-overlay {
+    animation: fade-in 0.3s ease;
+}
+
+.todo-modal {
+    animation: slide-up 0.4s ease;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slide-up {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Soft glowing effect for active states */
+.project-item.active,
+.sidebar-nav a.active {
+    box-shadow: 0 0 10px rgba(75, 255, 176, 0.3);
+    border-left: 4px solid var(--accent-color);
+    color: black;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .app-sidebar {
+        animation: slide-in 0.4s ease;
+    }
+
+    @keyframes slide-in {
+        from { left: -300px; }
+        to { left: 0; }
+    }
+}
+
+/* Additional subtle touches */
+.app-title .todo {
+    transition: color 0.3s ease;
+}
+
+.app-title:hover .todo {
+    color: var(--accent-color);
+}
