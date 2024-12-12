@@ -1,5 +1,3 @@
-# To-Do-List
-
 # To-Do List Project
 
 **Live Demo:** [To-Do List](https://joel-cornfield.github.io/To-Do-List/)
